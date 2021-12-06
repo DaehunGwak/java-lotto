@@ -1,13 +1,17 @@
 package lotto.domain;
 
 import lotto.domain.util.LottoTestUtils;
+import lotto.util.LottoConstants;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -37,10 +41,11 @@ class LottoResultTest {
 
     @Test
     void earningRate() {
-        int purchaseAmount = 3000;
-        int earningAmount = LottoPrize.SIX_SAME.prizeMoney() +
-                LottoPrize.FIVE_SAME.prizeMoney() +
-                LottoPrize.NOTHING.prizeMoney();
+        BigDecimal purchaseAmount = BigDecimal.valueOf(3000);
+        BigDecimal earningAmount = Stream.of(LottoPrize.SIX_SAME, LottoPrize.FIVE_SAME, LottoPrize.NOTHING)
+                .map(LottoPrize::prizeMoney)
+                .reduce(BigDecimal::add)
+                .get();
 
         LottoPrice lottoPrice = new LottoPrice(purchaseAmount);
         List<LottoTicket> lottoTickets = Arrays.asList(
@@ -53,7 +58,12 @@ class LottoResultTest {
         LottoResult lottoResult = new LottoResult(myLottoTickets, winnerLottoTicket);
         lottoResult.countPrize();
 
+        BigDecimal expectedEarningRate = earningAmount.divide(
+                lottoPrice.realPurchaseAmount(),
+                LottoConstants.EARNING_RATE_SCALE,
+                RoundingMode.HALF_EVEN);
+
         assertThat(lottoResult.earningRate())
-                .isEqualTo(((double) earningAmount) / lottoPrice.realPurchaseAmount());
+                .isEqualTo(expectedEarningRate);
     }
 }

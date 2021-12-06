@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -26,7 +27,7 @@ public class MyLottoTickets {
         }
     }
 
-    public int totalTicketPurchasePrice() {
+    public BigDecimal totalTicketPurchasePrice() {
         return lottoPrice.realPurchaseAmount();
     }
 

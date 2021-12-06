@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.util.LottoConstants;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -39,15 +43,21 @@ public class LottoResult {
         return prizeCount.get(lottoPrize);
     }
 
-    public double earningRate() {
-        double totalPrizeAmount = prizeCount.entrySet()
+    public BigDecimal earningRate() {
+        BigDecimal totalPrizeAmount = prizeCount.entrySet()
                 .stream()
-                .mapToLong(this::eachPrizeAmount)
-                .sum();
-        return totalPrizeAmount / myLottoTickets.totalTicketPurchasePrice();
+                .map(this::eachPrizeAmount)
+                .reduce(BigDecimal::add)
+                .orElseThrow(() -> new ArithmeticException("earningRate 추출 계산 중 오류가 있습니다"));
+        return totalPrizeAmount.divide(
+                myLottoTickets.totalTicketPurchasePrice(),
+                LottoConstants.EARNING_RATE_SCALE,
+                RoundingMode.HALF_EVEN);
     }
 
-    private long eachPrizeAmount(Map.Entry<LottoPrize, Long> lottoPrizeLongEntry) {
-        return lottoPrizeLongEntry.getKey().prizeMoney() * lottoPrizeLongEntry.getValue();
+    private BigDecimal eachPrizeAmount(Map.Entry<LottoPrize, Long> lottoPrizeLongEntry) {
+        return lottoPrizeLongEntry.getKey()
+                .prizeMoney()
+                .multiply(BigDecimal.valueOf(lottoPrizeLongEntry.getValue())) ;
     }
 }
