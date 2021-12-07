@@ -4,8 +4,6 @@ import lotto.domain.LottoPurchaseAmount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
-import java.math.BigDecimal;
-
 public class LottoMain {
 
     public static void main(String[] args) {
@@ -14,5 +12,8 @@ public class LottoMain {
 
         outputView.printPurchaseAmountInputGuide();
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(inputView.purchaseAmount());
+        outputView.printNumberOfTicket(
+                lottoPurchaseAmount.numberOfTicket());
+
     }
 }
