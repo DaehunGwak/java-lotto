@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoPurchaseAmount;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,6 +13,6 @@ public class LottoMain {
         OutputView outputView = new OutputView();
 
         outputView.printPurchaseAmountInputGuide();
-        BigDecimal purchaseAmount = inputView.purchaseAmount();
+        LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(inputView.purchaseAmount());
     }
 }
