@@ -11,8 +11,6 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private static final long DEFAULT_PRIZE_COUNT = 0;
-
     private final MyLottoTickets myLottoTickets;
     private final LottoTicket winnerLottoTicket;
     private final Map<LottoPrize, Long> prizeCount = new EnumMap<>(LottoPrize.class);
