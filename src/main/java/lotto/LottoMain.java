@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.LottoPurchaseAmount;
+import lotto.domain.MyLottoNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -12,8 +13,9 @@ public class LottoMain {
 
         outputView.printPurchaseAmountInputGuide();
         LottoPurchaseAmount lottoPurchaseAmount = new LottoPurchaseAmount(inputView.purchaseAmount());
-        outputView.printNumberOfTicket(
-                lottoPurchaseAmount.numberOfTicket());
+        int numberOfTicket = lottoPurchaseAmount.numberOfTicket();
+        outputView.printNumberOfTicket(numberOfTicket);
 
+        MyLottoNumbers myLottoNumbers = MyLottoNumbers.of(numberOfTicket);
     }
 }
