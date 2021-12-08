@@ -8,26 +8,26 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static lotto.util.LottoTestConstants.PARAMETRIZED_TEST_NAME;
 import static org.assertj.core.api.Assertions.*;
 
-class LottoNumbersTest {
+class LottoTicketTest {
 
     @Test
     void create() {
-        assertThatCode(() -> new LottoNumbers(1, 2, 3, 5, 9, 45))
+        assertThatCode(() -> new LottoTicket(1, 2, 3, 5, 9, 45))
                 .doesNotThrowAnyException();
     }
 
     @ParameterizedTest(name = PARAMETRIZED_TEST_NAME)
     @CsvSource(value = {"0,1,2,3,4,5", "1,2,3,4,5,46"})
-    @DisplayName("create 생성 실패 케이스")
+    @DisplayName("create 실패 케이스")
     void createWithException(int n1, int n2, int n3, int n4, int n5, int n6) {
         int[] numbers = {n1, n2, n3, n4, n5, n6};
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoNumbers(numbers));
+                .isThrownBy(() -> new LottoTicket(numbers));
     }
 
     @Test
     void randomLottoNumbers() {
-        assertThatCode(LottoNumbers::randomLottoNumbers)
+        assertThatCode(LottoTicket::randomLottoNumbers)
                 .doesNotThrowAnyException();
     }
 }

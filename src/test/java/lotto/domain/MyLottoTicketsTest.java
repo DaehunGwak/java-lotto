@@ -3,13 +3,12 @@ package lotto.domain;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
-class MyLottoNumbersTest {
+class MyLottoTicketsTest {
 
     @Test
     void of() {
-        assertThatCode(() -> MyLottoNumbers.of(20))
+        assertThatCode(() -> MyLottoTickets.of(20))
                 .doesNotThrowAnyException();
     }
 }
