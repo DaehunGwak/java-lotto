@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.LottoPurchaseAmount;
 import lotto.domain.MyLottoTickets;
+import lotto.domain.WinningLottoTicket;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,5 +19,9 @@ public class LottoMain {
 
         MyLottoTickets myLottoTickets = MyLottoTickets.of(numberOfTicket);
         outputView.printMyLottoTickets(myLottoTickets);
+
+        outputView.printWinningLottoTicketInputGuide();
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(inputView.lottoNumbers());
+        System.out.println(winningLottoTicket);
     }
 }

@@ -33,4 +33,8 @@ public class OutputView {
                 .collect(Collectors.joining(", "));
         System.out.println(LOTTO_TICKET_PREFIX + lottoNumbers + LOTTO_TICKET_POSTFIX);
     }
+
+    public void printWinningLottoTicketInputGuide() {
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+    }
 }
