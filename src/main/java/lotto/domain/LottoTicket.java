@@ -34,4 +34,8 @@ public class LottoTicket {
         List<LottoNumber> sixLottoNumbers = allLottoNumbers.subList(LOTTO_NUMBERS_START_INDEX, LOTTO_NUMBER_SIZE);
         return new LottoTicket(sixLottoNumbers);
     }
+
+    public List<LottoNumber> lottoNumbers() {
+        return Collections.unmodifiableList(this.lottoNumbers);
+    }
 }

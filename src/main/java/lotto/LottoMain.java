@@ -17,5 +17,6 @@ public class LottoMain {
         outputView.printNumberOfTicket(numberOfTicket);
 
         MyLottoTickets myLottoTickets = MyLottoTickets.of(numberOfTicket);
+        outputView.printMyLottoTickets(myLottoTickets);
     }
 }

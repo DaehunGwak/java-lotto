@@ -35,6 +35,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return Collections.unmodifiableList(CACHED_LOTTO_NUMBER_LIST);
     }
 
+    public int lottoNumber() {
+        return this.lottoNumber;
+    }
+
     @Override
     public int compareTo(LottoNumber o) {
         return this.lottoNumber - o.lottoNumber;
